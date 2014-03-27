@@ -15,12 +15,13 @@ public class MainActivity extends ActionBarActivity {
     final int REQUEST_TIME=1;
     private long totalMillis=0;
     TextView timeTextView;
+    SimpleTimeFormat timeFormatter=new SimpleTimeFormat();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         timeTextView=(TextView)findViewById(R.id.totalTime);
-        timeTextView.setText(parseLongMills(0));
+        timeTextView.setText(timeFormatter.parseLongMills(0));
         Button start=(Button)findViewById(R.id.start_activity);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,28 +35,21 @@ public class MainActivity extends ActionBarActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timeTextView.setText(parseLongMills(0));
+                timeTextView.setText(timeFormatter.parseLongMills(0));
                 totalMillis=0;
             }
         });
 
     }
-    private String parseLongMills(long millis){
-        int seconds = (int) (millis / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
 
-        return String.format("%02d:%02d", minutes, seconds);
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==REQUEST_TIME&&resultCode==RESULT_OK){
-            //String time =data.getExtras().getString("Timer");
-            //timeTextView.setText(time);
+
             long time=data.getExtras().getLong("LongTimer");
             totalMillis+=time;
-            timeTextView.setText(parseLongMills(totalMillis));
-            //Toast.makeText(getApplicationContext(),time,Toast.LENGTH_SHORT).show();
+            timeTextView.setText(timeFormatter.parseLongMills(totalMillis));
+            Toast.makeText(getApplicationContext(),time+"",Toast.LENGTH_SHORT).show();
 
         }
 

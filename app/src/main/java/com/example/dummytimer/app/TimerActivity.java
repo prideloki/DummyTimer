@@ -18,6 +18,7 @@ public class TimerActivity extends Activity {
     long startTime = 0L;
     long millis=0L;
     private Handler timerHandler = new Handler();
+    SimpleTimeFormat timeFormatter=new SimpleTimeFormat();
     Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
@@ -27,7 +28,7 @@ public class TimerActivity extends Activity {
             int minutes = seconds / 60;
             seconds = seconds % 60;
             */
-            timerTextView.setText(String.format(parseLongMills(millis)));
+            timerTextView.setText(String.format(timeFormatter.parseLongMills(millis)));
             timerHandler.postDelayed(this, 500);
 
         }
@@ -39,7 +40,7 @@ public class TimerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         timerTextView = (TextView) findViewById(R.id.showTimer_running_textView);
-        timerTextView.setText(parseLongMills(0));
+        timerTextView.setText(timeFormatter.parseLongMills(0));
         Button close_activity = (Button) findViewById(R.id.close_act);
         close_activity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,16 +55,11 @@ public class TimerActivity extends Activity {
         timerHandler.postDelayed(timerRunnable, 0);
 
     }
-    private String parseLongMills(long millis){
-        int seconds = (int) (millis / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
 
-        return String.format("%02d:%02d", minutes, seconds);
-    }
     @Override
     public void finish() {
-        log("Enter Finish Method "+timerTextView.getText().toString());
+        log("Enter Finish Method ");
+        if(timerTextView.getText().toString()==null)log("timerTextView String is null");
         Intent data = new Intent();
 
         data.putExtra("Timer",timerTextView.getText().toString());
