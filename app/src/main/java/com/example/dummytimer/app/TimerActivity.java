@@ -22,6 +22,7 @@ public class TimerActivity extends Activity {
     private String TAG = "Timer Activity";
     TextView timerTextView;
     private static boolean isPomodoro=true;
+    private static boolean isAutoring=true;
     long startTime = 0L;
     long millis=0L;
     private Handler timerHandler = new Handler();
@@ -92,7 +93,7 @@ public class TimerActivity extends Activity {
         if(timerTextView.getText().toString()==null)log("timerTextView String is null");
         Intent data = new Intent();
         if(notificationManager!=null)notificationManager.cancelAll();
-        data.putExtra("LongTimer",millis);
+        data.putExtra("LongTimer", millis);
         setResult(RESULT_OK, data);
 
         super.finish();
@@ -105,12 +106,6 @@ public class TimerActivity extends Activity {
         super.onDestroy();
     }
 
-    public static void setPomodoro(boolean isPomodoro) {
-        TimerActivity.isPomodoro = isPomodoro;
-    }
-    public static boolean isIsPomodoro() {
-        return isPomodoro;
-    }
 
     private int getMinutes(){
         millis = System.currentTimeMillis() - startTime;
@@ -127,15 +122,16 @@ public class TimerActivity extends Activity {
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         PendingIntent pendingIntent=PendingIntent.getActivity(TimerActivity.this,0,intent,0);
-
+        long[] mVibratePattern = {0, 200, 200, 300};
         NotificationCompat.Builder mBuilder=new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
                 .setContentTitle("Time UP!")
                 .setContentText("text")
-                .setContentIntent(pendingIntent)
-                .setSound(soundUri);
-
-
+                .setContentIntent(pendingIntent);
+        if(isAutoring){
+            mBuilder.setVibrate(mVibratePattern);
+            mBuilder.setSound(soundUri);
+        }
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mBuilder.setAutoCancel(true);
         notificationManager.notify(0,mBuilder.build());
@@ -144,5 +140,17 @@ public class TimerActivity extends Activity {
 
     private void log(String message) {
         Log.i(TAG, message);
+    }
+    public static void setPomodoro(boolean isPomodoro) {
+        TimerActivity.isPomodoro = isPomodoro;
+    }
+    public static boolean isIsPomodoro() {
+        return isPomodoro;
+    }
+    public static boolean isIsAutoring() {
+        return isAutoring;
+    }
+    public static void setIsAutoring(boolean isAutoring) {
+        TimerActivity.isAutoring = isAutoring;
     }
 }

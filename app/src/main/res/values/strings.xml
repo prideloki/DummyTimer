@@ -11,4 +11,5 @@
     <string name="toggle_turn_off">OFF</string>
     <string name="settings_pomLabel">1 Min</string>
     <string name="settings_unlimitLabel">Unlimit</string>
+    <string name="settings_autoring">Auto ring</string>
 </resources>

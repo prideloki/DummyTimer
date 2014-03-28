@@ -16,7 +16,7 @@ public class Settings extends Activity {
         setContentView(R.layout.activity_settings);
         final ToggleButton pomdoro=(ToggleButton)findViewById(R.id.togglePomdoro);
         final ToggleButton unlimit=(ToggleButton)findViewById(R.id.toggleUnlimit);
-
+        final ToggleButton autoring=(ToggleButton)findViewById(R.id.toggleAutoring);
         if(TimerActivity.isIsPomodoro()){
             pomdoro.setChecked(true);
             unlimit.setChecked(false);
@@ -24,6 +24,9 @@ public class Settings extends Activity {
             pomdoro.setChecked(false);
             unlimit.setChecked(true);
         }
+
+        if(TimerActivity.isIsAutoring())autoring.setChecked(true);
+
         pomdoro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -49,6 +52,16 @@ public class Settings extends Activity {
                 }
 
                 TimerActivity.setPomodoro(false);
+            }
+        });
+        autoring.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    TimerActivity.setIsAutoring(true);
+                }else{
+                    TimerActivity.setIsAutoring(false);
+                }
             }
         });
     }
