@@ -7,4 +7,8 @@
     <string name="start_timer">Start Timer</string>
     <string name="restart_timer">Reset</string>
     <string name="close_timer">Close</string>
+    <string name="toggle_turn_on">ON</string>
+    <string name="toggle_turn_off">OFF</string>
+    <string name="settings_pomLabel">1 Min</string>
+    <string name="settings_unlimitLabel">Unlimit</string>
 </resources>

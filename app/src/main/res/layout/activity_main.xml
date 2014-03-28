@@ -1,14 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.dummytimer.app.MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.example.dummytimer.app.MainActivity">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:gravity="center">
+
         <TextView
             android:id="@+id/totalTime"
             android:text=""
@@ -19,29 +21,29 @@
             android:textSize="50dp"
             android:textAlignment="center"
             android:gravity="center"/>
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/totalTime2"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/start_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/start_timer"
-                android:textSize="20dp"
-                android:textAlignment="center"
-                android:layout_gravity="center"/>
-            <Button
-                android:id="@+id/reset_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/restart_timer"
-                android:textSize="20dp"
-                android:textAlignment="center"
-                android:layout_gravity="center"/>
-            </LinearLayout>
+            android:layout_gravity="center"
+            android:paddingBottom="30dp"
+            android:textSize="50dp"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+
+        <Button
+            android:id="@+id/reset_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/restart_timer"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+
 
     </LinearLayout>
 
